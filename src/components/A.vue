@@ -1,12 +1,11 @@
 <template>
   <div>
-      <button @click="onClick">通知子组件</button>
-      <B />
+      
   </div>
 </template>
 
 <script>
-import B from './B.vue'
+import Form from './B.vue'
 import Emitter from '../mixins/emitter'
 export default {
     name: 'componentA',
