@@ -3,6 +3,7 @@
       <i-form
       :model="formInfo"
       :rules="rules"
+      ref="form"
       >
           <i-form-item
             label="姓名"
@@ -17,6 +18,8 @@
               <i-input v-model="formInfo.mail" />
           </i-form-item>
       </i-form>
+      <button @click="onSubmit">提交</button>
+      <button @click="onReset">重置</button>
   </div>
 </template>
 
@@ -42,8 +45,31 @@ export default {
                 ],
                 mail: [
                     { required: true, message: '邮箱不能为空', trigger: 'blur' },
+                    { type: 'email', message: '邮箱格式不正确', trigger: 'blur' }
                 ]
             }
+        }
+    },
+    methods: {
+        onSubmit() {
+            // 回调函数的写法
+            // this.$refs.form.validate(valid => {
+            //     if (valid) {
+            //         alert('校验成功')
+            //     } else {
+            //         alert('校验失败')
+            //     }
+            // })
+
+            // promise的写法
+            this.$refs.form.validate().then(() => {
+                console.log('校验成功')
+            }).catch(err => {
+                console.log('校验失败', err)
+            })
+        },
+        onReset() {
+            this.$refs.form.resetFields()
         }
     }
 }
