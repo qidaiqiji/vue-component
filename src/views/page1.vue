@@ -1,20 +1,20 @@
 <template>
   <div>
       <i-form
-      :v-model="formInfo"
+      :model="formInfo"
       :rules="rules"
       >
           <i-form-item
             label="姓名"
             prop="name"
           >
-              <i-input />
+              <i-input v-model="formInfo.name" />
           </i-form-item>
           <i-form-item
             label="邮件"
             prop="mail"
           >
-              <i-input />
+              <i-input v-model="formInfo.mail" />
           </i-form-item>
       </i-form>
   </div>
@@ -38,6 +38,9 @@ export default {
             },
             rules: {
                 name: [
+                    { required: true, message: '姓名不能为空', trigger: 'blur' },
+                ],
+                mail: [
                     { required: true, message: '邮箱不能为空', trigger: 'blur' },
                 ]
             }

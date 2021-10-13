@@ -20,6 +20,11 @@ export default {
             type: Object,
         }
     },
+    provide() {
+        return {
+            form: this
+        }
+    },
     // 组件渲染顺序是由内而外，form-item在mounted时触发事件时，form的mounted还未触发，所以监听不到。
     // 父组件的created先于子组件的mounted执行，所以要在created监听子组件事件
     /**
@@ -31,9 +36,7 @@ export default {
      */
     
     created() {
-        console.log('父组件created')
         this.$on('on-form-item-add', (field) => {
-            console.log('ooooo', field)
             if (field) this.fields.push(field)
         })
         this.$on('on-form-item-remove', (field) => {
@@ -41,7 +44,6 @@ export default {
         })
     },
     mounted() {
-        console.log('父组件mounted')
     },
     methods: {
     },
